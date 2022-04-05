@@ -1,10 +1,7 @@
-name: GROMACS Build and Test
+name: GROMACS Build Test
 
 on:
   pull_request:
-  push:
-    branches:
-      - worflow-testing
   workflow_dispatch:
 
 jobs:
