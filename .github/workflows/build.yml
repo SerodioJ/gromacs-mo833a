@@ -1,0 +1,16 @@
+name: GROMACS Build and Test
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt-get update && sudo apt-get install wget g++ cmake -y
+      - run: mkdir build && cd build
+      - run: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON 
+      - run: make
+      - run: make test
