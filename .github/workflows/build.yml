@@ -2,6 +2,9 @@ name: GROMACS Build and Test
 
 on:
   pull_request:
+  push:
+    branches:
+      - worflow-testing
   workflow_dispatch:
 
 jobs:
@@ -10,7 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get update && sudo apt-get install wget g++ cmake -y
-      - run: mkdir build && cd build
-      - run: cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON 
-      - run: make
-      - run: make test
+      - run: mkdir build && cd build && cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON && make
