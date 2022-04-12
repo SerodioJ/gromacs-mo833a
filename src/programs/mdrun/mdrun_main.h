@@ -42,4 +42,6 @@ int gmx_mdrun(int argc, char* argv[]);
 
 } // namespace gmx
 
+double timestamp();
+
 #endif

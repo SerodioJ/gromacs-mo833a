@@ -55,6 +55,7 @@
 #include "config.h"
 
 #include <memory>
+#include <sys/time.h>
 
 #include "gromacs/commandline/pargs.h"
 #include "gromacs/domdec/options.h"
@@ -267,7 +268,20 @@ int gmx_mdrun(int argc, char* argv[])
 
     auto runner = builder.build();
 
-    return runner.mdrunner();
+    double elapsed, start = timestamp();
+    int return_value = runner.mdrunner();
+    elapsed = timestamp() - start;
+
+    printf("[MO833]: runner.mdrunner() exec. time: %f", elapsed);
+    return return_value;
 }
 
 } // namespace gmx
+
+double timestamp()
+{
+    struct timeval  tp;
+    struct timezone tzp;
+    gettimeofday(&tp, &tzp);
+    return ((double)tp.tv_sec + (double)tp.tv_usec * 1.e-6);
+}
