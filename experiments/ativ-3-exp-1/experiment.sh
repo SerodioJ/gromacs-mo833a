@@ -4,6 +4,7 @@ samples=10;
 data_path="data";
 results_path="results"
 
+trap "exit" INT
 while getopts s:p:r: flag
 do
     case "${flag}" in

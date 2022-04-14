@@ -1,7 +1,8 @@
 #!/bin/bash
 
 release=true
-while getopts :d flag
+trap "exit" INT
+while getopts d flag
 do
     case "${flag}" in
         d) release=false;;
