@@ -20,7 +20,7 @@ echo Starting Perf Profiling
 docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release perf record --call-graph lbr -o $results_path/perf.data gmx mdrun -v -deffnm $data_path/em
 echo Perf Profiling ended
 
-Callgrind
+# Callgrind
 echo Starting Callgrind Profiling
 docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release valgrind --tool=callgrind --callgrind-out-file=$results_path/callgrind.data gmx mdrun -v -deffnm $data_path/em
 echo Perf Profiling ended
