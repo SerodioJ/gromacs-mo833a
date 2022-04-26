@@ -20,7 +20,7 @@ FROM ubuntu:20.04
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install cmake -y
+    apt-get install cmake valgrind linux-tools-common linux-tools-generic linux-tools-`uname -r` -y
 
 # Copy installed GROMACS from build stage
 COPY --from=build_stage /usr/local/gromacs /usr/local/gromacs
