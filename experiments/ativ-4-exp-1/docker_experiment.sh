@@ -16,9 +16,13 @@ mkdir -p $results_path
 OLD_PATH=$PATH
 
 # Perf
-echo Starting Perf Profiling
-docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release perf record --call-graph lbr -o $results_path/perf.data gmx mdrun -v -deffnm $data_path/em
-echo Perf Profiling ended
+echo Starting Perf nt = default Profiling
+docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release perf record --call-graph lbr -o $results_path/perf.data.t8 gmx mdrun -v -deffnm $data_path/em
+echo Perf Profiling nt = default ended
+
+echo Starting Perf nt = 1 Profiling
+docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release perf record --call-graph lbr -o $results_path/perf.data.t1 gmx mdrun -nt 1 -v -deffnm $data_path/em
+echo Perf Profiling nt = 1 ended
 
 # Callgrind
 echo Starting Callgrind Profiling
