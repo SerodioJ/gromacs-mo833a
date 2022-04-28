@@ -25,6 +25,11 @@ docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:r
 echo Perf Profiling nt = 1 ended
 
 # Callgrind
-echo Starting Callgrind Profiling
-docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release valgrind --tool=callgrind --callgrind-out-file=$results_path/callgrind.data gmx mdrun -v -deffnm $data_path/em
-echo Perf Profiling ended
+echo Starting Callgrind nt = default Profiling
+docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release valgrind --tool=callgrind --callgrind-out-file=$results_path/callgrind.data.t8 gmx mdrun -v -deffnm $data_path/em
+echo Perf Profiling nt = default ended
+
+echo Starting Callgrind nt = 1 Profiling
+docker run -it --privileged -v ${PWD}:${PWD} -w ${PWD} --rm gromacs-ativ4-exp1:release valgrind --tool=callgrind --callgrind-out-file=$results_path/callgrind.data.t1 gmx mdrun -nt 1 -v -deffnm $data_path/em
+echo Perf Profiling nt = 1 ended
+
